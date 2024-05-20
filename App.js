@@ -1,46 +1,16 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import { SafeAreaView, View, Image } from 'react-native';
+import CustomButton from './button';
+import Teks from './text';
 
 export default function App() {
   return (
-    <View style={{ flex: 1, 
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      alignItems: 'flex-end',
-      flexDirection: 'row',
-     }}>
-      <View style={{
-        backgroundColor: 'red',
-        width: 100,
-        height: 40,
-        marginRight: 10,
-        borderRadius: 10,
-      }}>
-      <Text style={{
-        color:'white',
-        textAlign:'center',
-        fontSize:20,
-        fontWeigth:'bold',
-      }}>
-        Login
-        </Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Teks />
+        <Image source={require('./assets/gojek.png')} style={{ width: 300, height: 200, marginVertical: 30 }} />
+        <CustomButton />
       </View>
-      <View style={{
-         backgroundColor: 'blue',
-         marginRight: 10,
-         width: 100,
-         height: 40,
-         borderRadius: 10,
-      }}>
-        <Text style={{
-        color:'white',
-        textAlign:'center',
-        fontSize:20,
-        fontWeigth:'bold',
-      }}>
-        Register
-        </Text>
-      </View>
-      </View>     
+    </SafeAreaView>
   );
 }

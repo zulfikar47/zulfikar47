@@ -8,12 +8,11 @@ export default function App() {
       justifyContent: 'center',
       alignItems: 'flex-end',
       flexDirection: 'row',
-  
      }}>
       <View style={{
         backgroundColor: 'red',
-        width: 150,
-        height: 50,
+        width: 100,
+        height: 40,
         marginRight: 10,
         borderRadius: 10,
       }}>
@@ -29,8 +28,8 @@ export default function App() {
       <View style={{
          backgroundColor: 'blue',
          marginRight: 10,
-         width: 150,
-         height: 50,
+         width: 100,
+         height: 40,
          borderRadius: 10,
       }}>
         <Text style={{

@@ -1,11 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <View style={{ flex: 1, 
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      flexDirection: 'row',
+  
+     }}>
+      <View style={{
+        backgroundColor: 'red',
+        width: 150,
+        height: 50,
+        marginRight: 10,
+        borderRadius: 10,
+      }}>
+      <Text style={{
+        color:'white',
+        textAlign:'center',
+        fontSize:20,
+        fontWeigth:'bold',
+      }}>
+        Login
+        </Text>
+      </View>
+      <View style={{
+         backgroundColor: 'blue',
+         marginRight: 10,
+         width: 150,
+         height: 50,
+         borderRadius: 10,
+      }}>
+        <Text style={{
+        color:'white',
+        textAlign:'center',
+        fontSize:20,
+        fontWeigth:'bold',
+      }}>
+        Register
+        </Text>
+      </View>
+      </View>     
+  );
 }

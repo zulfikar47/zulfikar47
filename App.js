@@ -1,44 +1,35 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { useFonts } from 'expo-font'
 
-const CostumButton = () => {
-    return (
-        <View style={{
-            flex: 1,
-            backgroundColor: 'white',
-            justifyContent: 'center', //kolom
-            alignItems: 'flex-end', //baris
-            flexDirection: 'row',
-            padding: 20,
-            marginBottom: 80
-          }}>
-            <ButtonComponent backgroundColor='black' text='Login'/>
-            <ButtonComponent backgroundColor='green'text='Register'/>
-            </View>
-    )
+const App = () => {
   
-}
-const ButtonComponent = ({backgroundColor,text})=>{
-  return(
-    <View style={{
-      backgroundColor: backgroundColor,
-       width: 100, height: 50,
-      bondenRadius: 10,
-      marginLeft: 10
-  }}>
-      <Text style={{
-          color: 'white',
-          textAlign:'center',
-          lineHeight: 50,
-          fontSize: 20,
-          fontWeight: 'bold'
-      }}>
-          {text}
-      </Text>
+  const [fontsLoaded, fontError] = useFonts({
+    'Metro-Bold': require('./assets/fonts/Metropolis-Bold.otf'),
+    'Metro-Medium': require('./assets/fonts/Metropolis-Medium.otf'),
+    'Metro-Semibold': require('./assets/fonts/Metropolis-SemiBold.otf'),
+    'Metro-Black': require('./assets/fonts/Metropolis-Black.otf'),
+
+
+  });
+      if (!fontsLoaded) return 
+      <View>
+          <Text>Font tidak ditemukan !</Text>
       </View>
-    
-  )
+
+  return (
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <Text style={{ fontSize: 30}}>Font Biasa</Text>
+        <Text style={{ fontFamily: 'Metro-Bold', fontSize: 30 }}>Metro Bold</Text>
+        <Text style={{ fontFamily: 'Metro-Medium', fontSize: 30 }}>Metro Medium</Text>
+        <Text style={{ fontFamily: 'Metro-Semibold', fontSize: 30 }}>Metro SemiBold</Text>
+        <Text style={{ fontFamily: 'Metro-Black', fontSize: 30 }}>Metro Black</Text>
+
+      </View>
+    )
 }
-            
-             
-      export default CostumButton;
+export default App

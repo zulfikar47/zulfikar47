@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import Headline from '../Component/Headline';
 import InputText from '../Component/InputText';
 import ButtonComponent from '../Component/Button';
 import Konfirmasi from '../Component/Konfirmasi';
 import IconButton from '../Component/IconButton';
-import Headline from '../Component/Headline';
 
-const Login = () => {
+const SignUp = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
@@ -16,35 +16,38 @@ const Login = () => {
                 <View style={{
                     marginBottom: 50,
                 }}>
-                    <Headline text="Login" />
+                    <Headline text="Sign up" />
                 </View>
 
                 <View style={{}}>
+                    <InputText placeholder="Name" />
                     <InputText placeholder="Email" />
-                    <InputText placeholder="Password" passwordRules="*" />
+                    <InputText placeholder="Password" passwordRules="*"/>
                 </View>
 
                 <View style={{
-                    marginTop: -10,
-                    marginLeft: 130,
+                    marginTop: -20,
+                    marginLeft: 100,
                 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-                        <Konfirmasi text="Forgot your password?" />
+                    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                        <Konfirmasi text="Already have an account?" fontSize={14} />
                     </TouchableOpacity>
                 </View>
 
-                <View style={{}}>
-                    <ButtonComponent backgroundColor="#FF0000" text="LOGIN" />
+
+                <View style={{ marginTop: 5 }}>
+                   
+                        <ButtonComponent backgroundColor="#FF0000" text="SIGN UP" />
+                  
+                </View>
+
+
+                <View style={{ marginTop: -5 }}>
+                    <Konfirmasi text="Or sign up with social account" fontSize={14} />
                 </View>
 
                 <View style={{
-                    marginTop: 80,
-                }}>
-                    <Konfirmasi text="Or login with social account" />
-                </View>
-
-                <View style={{
-                    marginTop: 0,
+                    marginTop: 10,
                 }}>
                     <View style={{
                         flexDirection: 'row',
@@ -61,4 +64,6 @@ const Login = () => {
     )
 }
 
-export default Login;
+
+
+export default SignUp;

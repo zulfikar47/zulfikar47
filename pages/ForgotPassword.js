@@ -1,49 +1,79 @@
 import React from 'react';
-import { View } from 'react-native';
-import {SafeAreaView } from 'react-native-safe-area-context';
-import Headline from '../Component/Headline';
-import InputText from '../Component/InputText'
-import ButtonComponent from '../Component/Button';
-import Konfirmasi from '../Component/Konfirmasi';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 const ForgotPassword = () => {
-
   return (
-      <SafeAreaView>
-          <View>
-            <View style={{
-              marginBottom: 50,
-            }}>
-              <Headline text="Forgot password" />
-            </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <Text style={styles.title}>Forgot password</Text>
+        <Text style={styles.instruction}>
+          Please, enter your email address. You will receive a link to create a new password via email.
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="black"
+          keyboardType="email-address"
+        />
+        <Text style={styles.errorText}>
+          Not a valid email address. Should be your@email.com
+        </Text>
+        <TouchableOpacity style={styles.sendButton}>
+          <Text style={styles.sendButtonText}>SEND</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-            <View style={{
-              padding:10
-            }}>
-              <Konfirmasi text="Please, enter your email address. You will receive a link to create a new password via email." />
-            </View>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#00AA13',
+  },
+  innerContainer: {
+    flex: 1,
+    paddingHorizontal: 30,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'black',
+  },
+  instruction: {
+    fontSize: 14,
+    marginBottom: 20,
+    color: 'black',
+  },
+  input: {
+    height: 50,
+    borderColor: 'black',
+    borderWidth: 2,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    fontSize: 16,
+    marginBottom: 5,
+    color: 'black',
+  },
+  errorText: {
+    fontSize: 11,
+    marginBottom: 20,
+    color: 'black',
+    textAlign: 'center',
+  },
+  sendButton: {
+    backgroundColor: 'white',
+    paddingVertical: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  sendButtonText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 
-          <View style={{}}>
-              <InputText placeholder="Email" borderColor="#FF0000" placeholderTextColor="#FF0000" />
-          </View>
-
-          <View style={{
-              marginTop: -30,
-
-          }}>
-              <Konfirmasi text="Not a valid email address. Should be your@email.com" color="red" fontSize={11} />
-          </View>
-
-          <View style={{
-              marginTop: 20,
-          }}>
-          <ButtonComponent backgroundColor="#FF0000" text="SEND" />
-          </View>
-
-
-          </View>
-      </SafeAreaView>
-  )
-}
-
-export default ForgotPassword;
+export default ForgotPassword;

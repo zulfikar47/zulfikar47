@@ -1,130 +1,94 @@
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from "react";
+import { Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Profil from "./pages/Profil";
+import History from "./pages/History";
+import ForgotPassword from "./pages/ForgotPassword";
+import GoMart from "./pages/GoMart";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const LoginSimak = () => {
-  const [data, setData] = useState({
-    nim: '',
-    password: ''
-  });
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState('');
 
-  const onSubmit = () => {
-    axios.post('https://api.beasiswa.unismuh.ac.id/api/login', {
-      username: data.nim,
-      password: data.password
-    })
-      .then(response => {
-        if (response.status === 200) {
-          setUserData(response.data.data);
-          setError('');
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        setError('Ada kesalahan. Silahkan cek kembali nim dan password anda.');
-        setUserData(null);
-      });
-  }
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setData({ ...data, nim: value })}
-          placeholder="Nim"
-          placeholderTextColor="#aaa"
-          value={data.nim}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setData({ ...data, password: value })}
-          placeholder="Password"
-          placeholderTextColor="#aaa"
-          secureTextEntry
-          value={data.password}
-        />
-        <Button title="Login" onPress={onSubmit} />
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      </View>
-      {userData && (
-        <View style={styles.userDataContainer}>
-          <Text style={styles.userDataText}>ID: {userData.id}</Text>
-          <Text style={styles.userDataText}>Username: {userData.username}</Text>
-          <Text style={styles.userDataText}>Name: {userData.nama}</Text>
-          <Text style={styles.userDataText}>Role: {userData.role}</Text>
-          <Image
-            style={styles.userImage}
-            source={{ uri: `https://simakad.unismuh.ac.id/upload/mahasiswa/${userData.username}.jpg` }}
-          />
-        </View>
-      )}
-    </View>
-  );
+function MainTabs() {
+ return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: { backgroundColor: "black" }, 
+      }}
+    >
+   <Tab.Screen
+    name="Home"
+    component={Home}
+    options={{
+     headerShown: false,
+     tabBarLabel: ({ focused }) => <Text style={{ color: focused ? "#00AA13" : "gray" }}>Home</Text>,
+     tabBarIcon: ({ size, focused }) => (
+      <FontAwesome name="home" color={focused ? "#00AA13" : "gray"} size={size} />
+     ),
+    }}
+   />
+
+   <Tab.Screen
+    name="GoMart"
+    component={GoMart}
+    options={{
+     headerShown: false,
+     tabBarLabel: ({ focused }) => <Text style={{ color: focused ? "#00AA13" : "gray" }}>GoMart</Text>,
+     tabBarIcon: ({ size, focused }) => (
+      <FontAwesome name="shopping-basket" color={focused ? "#00AA13" : "gray"} size={size} />
+     ),
+    }}
+   />
+
+   <Tab.Screen
+    name="History"
+    component={History}
+    options={{
+     headerShown: false,
+     tabBarLabel: ({ focused }) => (
+      <Text style={{ color: focused ? "#00AA13" : "gray" }}>History</Text>
+     ),
+     tabBarIcon: ({ size, focused }) => (
+      <FontAwesome name="history" color={focused ? "#00AA13" : "gray"} size={size} />
+     ),
+    }}
+   />
+   
+   <Tab.Screen
+    name="Profil"
+    component={Profil}
+    options={{
+     headerShown: false,
+     tabBarLabel: ({ focused }) => (
+      <Text style={{ color: focused ? "#00AA13" : "gray" }}>Profile</Text>
+     ),
+     tabBarIcon: ({ size, focused }) => (
+      <FontAwesome name="user" color={focused ? "#00AA13" : "gray"} size={size} />
+     ),
+    }}
+   />
+  </Tab.Navigator>
+ );
 }
 
-export default LoginSimak;
+function App() {
+ return (
+  <NavigationContainer>
+   <Stack.Navigator>
+    <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+    <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
+    <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
+   </Stack.Navigator>
+  </NavigationContainer>
+ );
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
-  },
-  inputContainer: {
-    width: '100%',
-    maxWidth: 400,
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    marginBottom: 20,
-  },
-  input: {
-    height: 50,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    fontSize: 16,
-    color: '#333',
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 10,
-    textAlign: 'center',
-  },
-  userDataContainer: {
-    width: '100%',
-    maxWidth: 400,
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    alignItems: 'center',
-  },
-  userDataText: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 5,
-  },
-  userImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginTop: 10,
-  },
-});
+export default App;
